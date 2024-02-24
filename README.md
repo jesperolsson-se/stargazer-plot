@@ -1,6 +1,15 @@
 # stargazer-plot
 Visualization of project popularity
 
+Produce an example plot by building and running the container.
+
+```bash
+docker build -t stargazer-plot .
+docker run --rm -v "$(pwd)/output":/output stargazer-plot:latest
+```
+
+Obtain real data from the GitHub API.
+
 ```bash
 organization="schemaspy"
 repository="schemaspy"
