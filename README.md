@@ -13,9 +13,9 @@ curl "https://api.github.com/repos/${organization}/${repository}/stargazers?per_
 | jq .[].starred_at >> data.csv
 ```
 
-Then build and run the container.
+Then pull and run the container.
 
 ```bash
-docker build -t stargazer-plot .
-docker run --rm -v "$(pwd)/data.csv":. -v "$(pwd)/output":/output stargazer-plot:latest
+docker pull jesperolssonse/stargazer-plot
+docker run --rm -v "$(pwd)/data.csv":/data.csv -v "$(pwd)/output":/output stargazer-plot:latest
 ```
