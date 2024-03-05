@@ -11,6 +11,9 @@ ggplot(data, aes(x = Timestamp)) +
   labs(
     x = "Time",
     y = "Stars",
-  )
+    caption = "(GitHub)"
+  ) +
+  theme_minimal() +
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
 
 dev.off()
