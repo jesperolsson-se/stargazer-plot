@@ -1,6 +1,8 @@
 # stargazer-plot
 Visualization of project popularity
 
+![](./example-plot.svg "Fig 1. The SchemaSpy project's stars over time")
+
 Obtain real data from the GitHub API.
 
 ```bash
