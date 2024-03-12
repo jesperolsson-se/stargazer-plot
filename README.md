@@ -1,23 +1,34 @@
-# stargazer-plot
-Visualization of project popularity
+[![CD](https://github.com/jesperolsson-se/stargazer-plot/actions/workflows/main.yml/badge.svg)](https://github.com/jesperolsson-se/stargazer-plot/actions/workflows/main.yml)
+[![Docker](https://img.shields.io/docker/v/jesperolssonse/stargazer-plot/latest)](https://hub.docker.com/r/jesperolssonse/stargazer-plot)
 
-![](./example-plot.svg "Fig 1. The SchemaSpy project's stars over time")
+**Stargazer plot** visualizes a project's GitHub stars as a time series,
+providing insight into its popularity.
 
-Obtain real data from the GitHub API.
+<img src="example-plot.svg" title="Fig 1. The SchemaSpy project's stars over time"/>
+
+# Usage
+
+First, obtain the stargazer data from the GitHub API.
 
 ```bash
 organization="schemaspy"
 repository="schemaspy"
 
 echo "Timestamp" > data.csv && \
-curl "https://api.github.com/repos/${organization}/${repository}/stargazers?per_page=100&page=1" \
+curl "https://api.github.com/repos/${organization}/${repository}/stargazers\
+?per_page=100&page=1" \
 -H 'Accept: application/vnd.github.v3.star+json' \
 | jq .[].starred_at >> data.csv
 ```
 
-Then pull and run the container.
+Then, pull and run the container.
 
 ```bash
 docker pull jesperolssonse/stargazer-plot
-docker run --rm -v "$(pwd)/data.csv":/data.csv -v "$(pwd)/output":/output stargazer-plot:latest
+docker run --rm \
+-v "$(pwd)/data.csv":/data.csv \
+-v "$(pwd)/output":/output \
+stargazer-plot
 ```
+
+That's it! You'll find the result in `output/stargazers.pdf`.
