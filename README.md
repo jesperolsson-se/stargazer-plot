@@ -13,12 +13,16 @@ First, obtain the stargazer data from the GitHub API.
 ```bash
 organization="schemaspy"
 repository="schemaspy"
+expected_stars=2950
 
-echo "Timestamp" > data.csv && \
-curl "https://api.github.com/repos/${organization}/${repository}/stargazers\
-?per_page=100&page=1" \
+echo "Timestamp" > data.csv
+pages=$((1 + $expected_stars/100))
+for i in $(seq 1 $pages); do
+  curl -s "https://api.github.com/repos/${organization}/${repository}/stargazers\
+?per_page=100&page=$i" \
 -H 'Accept: application/vnd.github.v3.star+json' \
-| jq .[].starred_at >> data.csv
+  | jq .[].starred_at >> data.csv
+done
 ```
 
 Then, pull and run the container.
