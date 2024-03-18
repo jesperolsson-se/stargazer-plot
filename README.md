@@ -13,10 +13,10 @@ First, obtain the stargazer data from the GitHub API.
 ```bash
 organization="schemaspy"
 repository="schemaspy"
-expected_stars=2950
 
 echo "Timestamp" > data.csv
-pages=$((1 + $expected_stars/100))
+total_stars=$(curl -s "https://api.github.com/repos/${organization}/${repository}" | jq .stargazers_count)
+pages=$((1 + $total_stars/100))
 for i in $(seq 1 $pages); do
   curl -s "https://api.github.com/repos/${organization}/${repository}/stargazers\
 ?per_page=100&page=$i" \
