@@ -8,7 +8,9 @@ providing insight into its popularity.
 
 # Usage
 
-First, obtain the stargazer data from the GitHub API.
+First, obtain the stargazer data from the GitHub API. (Please note the
+[API rate limits](https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api?apiVersion=2022-11-28)
+of 60 requests per hour for unauthenticated users.)
 
 ```bash
 organization="schemaspy"
